@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    {% block head %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+        <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/responsive.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='img/fevicon.ico') }}" rel="icon" type="image/gif"/>
+        <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+        <link rel="stylesheet" href="https://rawgit.com/LeshikJanz/libraries/master/Bootstrap/baguetteBox.min.css">
+        <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <title>{% block title %}{% endblock %} - Covid 19 Senegal</title>
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    {% endblock %}
+</head>
+
+<body class="main-layout">
+    <header class="header-area" id="navbar" >
+
+            <nav class="navbar navbar-expand-lg navbar-dark bg-light" style="z-index:1000">
+                <a class="navbar-brand" href="/">SNCVD19</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto" style="margin-left: 100px !important;">
+                        <li class="mr-4"><a href="/ctest/">Faire le Test</a></li>
+                        <li class="mr-4"><a href="/public/">Covid View SN</a></li>
+                        <li class="mr-5" style="font-weight: bold"><a href="/contact/">Macky Sall </a></li>
+                        {% if session.get("current_user", None) != None %}
+                            <li class="mr-3"><a href="/private/">Private</a></li>
+                        {% endif%}
+                        {% if session.get("current_user", None) == "ADMIN" %}
+                            <li class="mr-3"><a href="/admin/">Dashboard</a></li>
+                        {% endif %}
+                        <li class="ml-5" style="margin-left: 1.5rem !important;">
+                            <a href="/" class="logo_midle" >c o v i d 19 S e n e g a l</a></li>
+                    </ul>
+                    {% if session.get("current_user", None) == None %}
+                    <form action="/login" method="post" class="form-inline my-2 my-lg-0">
+                        <input type="text" name="id" placeholder="User Name" class="form-control" required="required">
+                        <input type="password" name="pw" placeholder="Password" class="form-control" required="required">
+                        <button type="submit" class="btn btn-dark">Log In</button>
+                    </form>
+                    {% else %}
+                        <li class="mr-5"><a><b>{{ session.get("current_user") }}</b></a></li>
+                        <li><a href="/logout"><b><u>Logout</u></b></a></li>
+                    {% endif %}
+                </div>
+            </nav>
+
+    </header>
+
+    {% block nav %}{% endblock %}
+    <!-- end banner -->
+    <!-- about -->
+    {% block about %}
+        <div class="about">
+            <div class="container_width">
+                <div class="row d_flex">
+                    <div class="col-md-7">
+                        <div class="titlepage text_align_left">
+                            <div class="container">
+                                <h2>{% block page_title %}{% endblock %}</h2>
+                                <p>
+                                    {% block body %}
+                                        {% block stas %}{% endblock %}
+                                    {% endblock %}
+                                </p>
+                                <hr>
+                            </div>
+                            Developed by
+                            <a href='https://www.malt.com/profile/aristidesabi' style="color: black; font-weight: bold">
+                                Aristide Sabi
+                            </a>
+                            <a href="https://www.groupeism.sn/ecole/ism-digital-campus">
+                                <img src="{{ url_for('static', filename='img/flask-powered.png') }}"
+                                     border="0"
+                                     align="right"
+                                     alt="ISM powered"
+                                     title="ISM powered">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="about_img text_align_center">
+                            <figure><img src="{{ url_for('static', filename='img/cabout.png') }}" alt="virus"/></figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- end about -->
+    {% endblock %}
+
+    {% block setcion1 %}
+    {% endblock %}
+
+    {% block setcion2 %}
+    {% endblock %}
+
+    {% block section3 %}
+    {% endblock %}
+
+    {% block section4 %}
+    {% endblock %}
+
+    {% block section5 %}
+    {% endblock %}
+
+    {% block scripts %}
+        <!-- Javascript files-->
+        <script href="{{ url_for('static', filename='js/jquery.min.j') }}"></script>
+        <script href="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+        <script href="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+        <script href="{{ url_for('static', filename='js/custom.js') }}"></script>
+    {% endblock %}
+</body>
+</html>

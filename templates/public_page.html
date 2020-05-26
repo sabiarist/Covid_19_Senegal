@@ -1,0 +1,125 @@
+{% extends "layout.html" %}
+{% block page_title %}Vue d'ensemble des cas{% endblock %}
+{% block body %}
+    {{ super() }}
+    <div class="card mb-3 mt-3">
+        <div class="card-header ">
+            Senegal
+        </div>
+        <div class="card-group ml-4">
+            <div class="card border-danger  mr-3"
+                 style="max-width: 10rem; max-height: 10rem; margin-top: 2rem;">
+                <div class="card-header">Confirmés</div>
+                <div class="card-body text-danger">
+                    <h5 class="card-title conf" style="font-weight: bold"></h5>
+                </div>
+            </div>
+            <div class="card border-success mr-3"
+                 style="max-width: 10rem; max-height: 10rem; margin-top: 2rem;">
+                <div class="card-header">Guérisons</div>
+                <div class="card-body text-success">
+                    <h5 class="card-title reco" style="font-weight: bold"></h5>
+                </div>
+            </div>
+            <div class="card border-dark"
+                 style="max-width: 10rem; max-height: 10rem; margin-top: 2rem;">
+                <div class="card-header">Décès</div>
+                <div class="card-body text-dark">
+                    <h5 class="card-title deat" style="font-weight: bold"></h5>
+                </div>
+            </div>
+        </div>
+        <div class="card-header mt-3">
+            Monde Entier
+        </div>
+        <div class="card-group ml-4">
+            <div class="card border-danger mb-3 mr-3"
+                 style="max-width: 10rem; max-height: 10rem; margin-top: 2rem;">
+                <div class="card-header">Confirmés</div>
+                <div class="card-body text-danger">
+                    <h5 class="card-title confw" style="font-weight: bold"></h5>
+                </div>
+            </div>
+            <div class="card border-success mb-3 mr-3"
+                 style="max-width: 10rem; max-height: 10rem; margin-top: 2rem;">
+                <div class="card-header">Guérisons</div>
+                <div class="card-body text-success">
+                    <h5 class="card-title recow" style="font-weight: bold"></h5>
+                </div>
+            </div>
+            <div class="card border-dark mb-3"
+                 style="max-width: 10rem; max-height: 10rem; margin-top: 2rem;">
+                <div class="card-header">Décès</div>
+                <div class="card-body text-dark">
+                    <h5 class="card-title deatw" style="font-weight: bold"></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    Mettre à jour l'API en vous <a style="color:orangered" href="#navbar">identifiant</a>.
+    <div class="alert alert-warning" role="alert">
+        <a href="https://buff.ly/3edV5Gg" target="_blank" style="color:orangered">
+            Autres lieux et statistiques
+        </a>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script>
+        $.ajax({
+            type:"GET",
+            dataType: "json",
+            url:"https://api.covid19api.com/country/senegal/status/confirmed/live",
+            success:function(data)
+            {
+                $('.conf').html(data[123].Cases);
+            }
+        });
+        $.ajax({
+            type:"GET",
+            dataType: "json",
+            url:"https://api.covid19api.com/country/senegal/status/deaths/live",
+            success:function(data)
+            {
+                $('.deat').html(data[123].Cases);
+            }
+        });
+        $.ajax({
+            type:"GET",
+            dataType: "json",
+            url:"https://api.covid19api.com/country/senegal/status/recovered/live",
+            success:function(data)
+            {
+                $('.reco').html(data[123].Cases);
+            }
+        });
+        $.ajax({
+            type:"GET",
+            dataType: "json",
+            url:"https://api.covid19api.com/world/total",
+            success:function(data)
+            {
+                $('.recow').html(data["TotalRecovered"]);
+            }
+        });
+        $.ajax({
+            type:"GET",
+            dataType: "json",
+            url:"https://api.covid19api.com/world/total",
+            success:function(data)
+            {
+                $('.deatw').html(data["TotalDeaths"]);
+            }
+        });
+        $.ajax({
+            type:"GET",
+            dataType: "json",
+            url:"https://api.covid19api.com/world/total",
+            success:function(data)
+            {
+                $('.confw   ').html(data["TotalConfirmed"]);
+            }
+        });
+    </script>
+{% endblock %}

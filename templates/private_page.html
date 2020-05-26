@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+
+{% block title %}Private Admin Page{% endblock %}
+
+{% block page_title %}Page Privée{% endblock %}
+
+{% block body %}
+    {{ super() }}
+    <hr>
+    <h4>Vous pouvez <p style="font-weight: bold">enregistrer des notes et télécharger des images</p> ici.
+        Vous seul pouvez y accéder. Ils seront supprimés lorsque votre compte sera supprimé.</h4>
+    <hr>
+    <h3>Ajouter Note</h3>
+    <div class="form-group">
+        <label for="textArea" class="col-lg-3 control-label">Note à prendre</label>
+        <div class="col-lg-9">
+            <form action="/write_note" method="post">
+                <br>
+                <input class="form-control" name="text_note_to_take">
+                <br>
+                <button type="submit" class="btn btn-dark">Enregistrer</button>
+            </form>
+        </div>
+    </div>
+    <hr>
+    <br>
+    {% if notes %}
+        <h3>Vos Notes</h3>
+        <table class="table small">
+            <thead>
+            <tr>
+                <th>Note ID</th>
+                <th>Timestamp</th>
+                <th>Note</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            {% for note_id, timestamp, note, act in notes %}
+                <tr>
+                    <td> {{ note_id }} </td>
+                    <td> {{ timestamp }} </td>
+                    <td> {{ note }} </td>
+                    <td><a style="color: black" href={{act}}>Delete</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+    <hr>
+    <br>
+    <h3>Charger Image</h3>
+    <br>
+    <form method='post' action='/upload_image' enctype=multipart/form-data>
+        <p><input type=file name=file>
+            <input type=submit value=Importer>
+    </form>
+    <hr>
+    {% if images %}
+        <h3>Vos Images</h3>
+        <table class="table small">
+            <thead>
+            <tr>
+                <th>Image ID</th>
+                <th>Timestamp</th>
+                <th>Image Name</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            {% for image_id, timestamp, image_name, act in images %}
+                <tr>
+                   <td> {{ image_id }} </td>
+                   <td> {{ timestamp }} </td>
+                   <td> {{ image_name }} </td>
+                   <td><a style="color: black" href={{act}}>Delete</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}
