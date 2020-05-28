@@ -1,3 +1,4 @@
 SECRET_KEY = "G-KaPdSgVkXp2s5v8y/B?E(H+MbQeThW"
 UPLOAD_FOLDER = "image_pool"
 MAX_CONTENT_LENGTH = 16 * 1024 * 1024
+
