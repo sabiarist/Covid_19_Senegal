@@ -1,5 +1,0 @@
-excludes:
-  scopes:
-    - name: "devDependencies"
-      reason: "TEST_DEPENDENCY_OF"
-      comment: "Packages for testing only."
